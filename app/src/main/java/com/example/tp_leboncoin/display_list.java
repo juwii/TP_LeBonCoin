@@ -28,6 +28,17 @@ public class display_list extends AppCompatActivity {
         ArrayList<AdModel> adModelArrayList = new ArrayList<AdModel>();
         AdAdapter ads = new AdAdapter(this.getBaseContext(), adModelArrayList);
         initializeAdList(ads.adModelArrayList);
+
+        Intent i = getIntent();
+        String m1 = i.getStringExtra ("Title");
+        String m2 = i.getStringExtra ("Address");
+        String m3 = i.getStringExtra ("Phone");
+
+        if(m1 != null && m2 != null && m3 != null){
+            AdModel ad = new AdModel(m1, m2, R.drawable.wood, m3);
+            ads.adModelArrayList.add(ad);
+        }
+
         setContentView(R.layout.activity_display_list);
         ListView lv = (ListView) findViewById(R.id.listview_materials);
         lv.setAdapter(ads);

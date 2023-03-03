@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         b2.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent lancementSecondeActivite = new Intent(MainActivity.this, add_material.class);
+                Intent lancementSecondeActivite = new Intent(MainActivity.this, AdAddActivity.class);
                 startActivity (lancementSecondeActivite);
             }
         });
