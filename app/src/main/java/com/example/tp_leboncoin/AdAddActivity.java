@@ -113,7 +113,8 @@ public class AdAddActivity extends AppCompatActivity {
         b1.setOnClickListener (new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbManager.insert(new AdModel(Title.getText().toString(), Address.getText().toString(), null, filePath, Phone.getText().toString()));
+                AdModel ad = new AdModel(Title.getText().toString(), Address.getText().toString(), null, filePath, Phone.getText().toString());
+                dbManager.insert(ad);
                 Intent sent = new Intent(AdAddActivity.this, display_list.class);
                 startActivity (sent);
             }

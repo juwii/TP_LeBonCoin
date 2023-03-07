@@ -68,11 +68,9 @@ public class DBManager {
 
     public Cursor fetch() {
         String[] columns;
-        if(DBHelper.IMAGE_EXT != null) {
-            columns = new String[] { DBHelper._ID, DBHelper.TITLE, DBHelper.ADDRESS, DBHelper.IMAGE_EXT};
-        } else {
-            columns = new String[] { DBHelper._ID, DBHelper.TITLE, DBHelper.ADDRESS, DBHelper.IMAGE_INT};
-        }
+
+        columns = new String[] { DBHelper._ID, DBHelper.TITLE, DBHelper.ADDRESS, DBHelper.IMAGE_EXT, DBHelper.IMAGE_INT, DBHelper.PHONE_NUMBER};
+
         Cursor cursor = database.query(DBHelper.TABLE_NAME, columns, null, null, null, null, null);
         if (cursor != null) {
             cursor.moveToFirst();
