@@ -3,13 +3,15 @@ package com.example.tp_leboncoin;
 public class AdModel {
     private String title;
     private String address;
-    private int image;
+    private String ext_path_image;
+    private String int_path_image;
     private String telephone_number;
     // Constructor
-    public AdModel(String title, String address, int image, String telephone_number) {
+    public AdModel(String title, String address, String ext_path_image, String int_path_image, String telephone_number) {
         this.title = title;
         this.address = address;
-        this.image = image;
+        this.int_path_image = int_path_image;
+        this.ext_path_image = ext_path_image;
         this.telephone_number = telephone_number;
     }
     // Getter and Setter
@@ -27,19 +29,22 @@ public class AdModel {
         this.address = address;
     }
 
-    public int getImage() {
-        return image;
+    public String getExternalPathImage() {
+        return ext_path_image;
     }
-    public void setImage(String title) {
-        this.image = image;
+    public void setExternalPathImage(String ext_path_image) {
+        this.ext_path_image = ext_path_image;
     }
-
+    public String getInternalPathImage() {
+        return ext_path_image;
+    }
+    public void setInternalPathImage(String int_path_image) {
+        this.int_path_image = int_path_image;
+    }
     public String getTelephone_number() {
         return this.telephone_number;
     }
     public void setTelephone_number(String telephone_number) {
         this.telephone_number = telephone_number;
     }
-
-// ...
 }
