@@ -17,6 +17,7 @@ import java.io.File;
 
 public class DbAdAdapter extends CursorAdapter {
     private final int item_layout;
+
     public DbAdAdapter(Context context, Cursor c, int layout) {
         super(context, c);
         item_layout = layout;
@@ -27,7 +28,6 @@ public class DbAdAdapter extends CursorAdapter {
     }
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        //TextView idTextView = (TextView) view.findViewById(R.id.);
         TextView titleTextView = (TextView) view.findViewById(R.id.material_title_textview);
         TextView addressTextView = (TextView) view.findViewById(R.id.material_address_textview);
         ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
@@ -53,7 +53,7 @@ public class DbAdAdapter extends CursorAdapter {
                 imageView.setImageBitmap(myBitmap);// Glide is a library to insert an image into an imageview with a url.
             }
         }
-        //idTextView.setText(id);
+
         titleTextView.setText(title);
         addressTextView.setText(address);
     }

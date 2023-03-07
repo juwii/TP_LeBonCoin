@@ -54,11 +54,15 @@ public class DBManager {
         ContentValues contentValue = new ContentValues();
         contentValue.put(DBHelper.TITLE, ad.getTitle());
         contentValue.put(DBHelper.ADDRESS, ad.getAddress());
-        if(DBHelper.IMAGE_EXT != null) {
+        contentValue.put(DBHelper.PHONE_NUMBER, ad.getTelephone_number());
+        if(ad.getExternalPathImage() != null) {
             contentValue.put(DBHelper.IMAGE_EXT, ad.getExternalPathImage());
-        } else {
+        } else if(ad.getInternalPathImage() != null) {
             contentValue.put(DBHelper.IMAGE_INT, ad.getInternalPathImage());
+        } else {
+            contentValue.put(DBHelper.IMAGE_INT, "@drawable/wood.jpg");
         }
+        System.out.println(ad.getInternalPathImage());
         database.insert(DBHelper.TABLE_NAME, null, contentValue);
     }
 

@@ -36,7 +36,7 @@ public class AdModel {
         this.ext_path_image = ext_path_image;
     }
     public String getInternalPathImage() {
-        return ext_path_image;
+        return int_path_image;
     }
     public void setInternalPathImage(String int_path_image) {
         this.int_path_image = int_path_image;
