@@ -18,15 +18,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String IMAGE_EXT = "MATERIAL_EXTERNAL_PATH";
     public static final String IMAGE_INT = "MATERIAL_INTERNAL_PATH";
     public static final String PHONE_NUMBER = "MATERIAL_PHONE_NUMBER";
+    public static final String EMAIL = "MATERIAL_EMAIL";
     // Database Information
     static final String DB_NAME = "LEBONCOIN.DB";
 
     // database version
-    static final int DB_VERSION = 13;
+    static final int DB_VERSION = 17;
 
     // Creating table query
     private static final String CREATE_TABLE = "create table " + TABLE_NAME + "(" + "_id"
-            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT NOT NULL, " + ADDRESS + " TEXT, " + IMAGE_EXT + " TEXT, " + IMAGE_INT + " TEXT, " + PHONE_NUMBER + " TEXT);";
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + TITLE + " TEXT NOT NULL, " + ADDRESS + " TEXT, " + IMAGE_EXT + " TEXT, " + IMAGE_INT + " TEXT, " + PHONE_NUMBER + " TEXT, " + EMAIL + " TEXT);";
 
     public DBHelper(Context context) {
         super(context,
@@ -82,6 +83,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String title = data.getString(data.getColumnIndexOrThrow(TITLE));
         String address = data.getString(data.getColumnIndexOrThrow(ADDRESS));
         String phone_number = data.getString(data.getColumnIndexOrThrow(PHONE_NUMBER));
-        return new AdModel(title, address, data.getString(data.getColumnIndexOrThrow(IMAGE_EXT)), data.getString(data.getColumnIndexOrThrow(IMAGE_INT)), phone_number);
+        String email = data.getString(data.getColumnIndexOrThrow(EMAIL));
+        return new AdModel(title, address, data.getString(data.getColumnIndexOrThrow(IMAGE_EXT)), data.getString(data.getColumnIndexOrThrow(IMAGE_INT)), phone_number, email);
     }
 }

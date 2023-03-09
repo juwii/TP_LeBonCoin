@@ -1,6 +1,9 @@
 package com.example.tp_leboncoin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,37 +19,39 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class display_list extends AppCompatActivity {
+
+    public ArrayList<AdModel> initializeAdList(ArrayList<AdModel> adModelArrayList, DBManager dbManager) {
+        for (int d = 0; d < dbManager.getIDs().length; d++) {
+            AdModel ad = dbManager.getById((int) dbManager.getIDs()[d]);
+            adModelArrayList.add(ad);
+        }
+        return adModelArrayList;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_list);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("My Title");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle navigation icon click here
+            }
+        });
+
         DBManager dbManager = DBManager.getDBManager(this);
         dbManager.open();
         Cursor cursor = dbManager.fetch();
 
-        CursorAdapter adapter = new DbAdAdapter(this, cursor, R.layout.item_listview_ad);
-        adapter.notifyDataSetChanged();
+        ArrayList<AdModel> adModelArrayList = new ArrayList<AdModel>();
+        adModelArrayList = initializeAdList(adModelArrayList, dbManager);
+        RecyclerViewAdAdapter adapter2 = new RecyclerViewAdAdapter(adModelArrayList);
 
-        ListView lv = (ListView) findViewById(R.id.listview_materials);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent lv_details = new Intent(display_list.this, AdViewActivity.class);
-                lv_details.putExtra("Title", dbManager.getById((int) id).getTitle());
-                lv_details.putExtra("Address", dbManager.getById((int) id).getAddress());
-                lv_details.putExtra("Phone", dbManager.getById((int) id).getTelephone_number());
-                if(dbManager.getById((int) id).getExternalPathImage() != null) {
-                    lv_details.putExtra("Picture", dbManager.getById((int) id).getExternalPathImage());
-                    lv_details.putExtra("Type_picture", "glide");
-                } else if(dbManager.getById((int) id).getInternalPathImage() != null) {
-                    lv_details.putExtra("Picture", dbManager.getById((int) id).getInternalPathImage());
-                    lv_details.putExtra("Type_picture", "bitmap");
-                } else {
-                    lv_details.putExtra("Type_picture", "default");
-                }
-                startActivity (lv_details);
-            }
-        });
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recyclerview);
+        rv.setAdapter(adapter2);
     }
 }

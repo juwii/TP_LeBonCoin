@@ -6,13 +6,15 @@ public class AdModel {
     private String ext_path_image;
     private String int_path_image;
     private String telephone_number;
+    private String email;
     // Constructor
-    public AdModel(String title, String address, String ext_path_image, String int_path_image, String telephone_number) {
+    public AdModel(String title, String address, String ext_path_image, String int_path_image, String telephone_number, String email) {
         this.title = title;
         this.address = address;
         this.int_path_image = int_path_image;
         this.ext_path_image = ext_path_image;
         this.telephone_number = telephone_number;
+        this.email = email;
     }
     // Getter and Setter
     public String getTitle() {
@@ -47,4 +49,6 @@ public class AdModel {
     public void setTelephone_number(String telephone_number) {
         this.telephone_number = telephone_number;
     }
+    public String getEmail() { return this.email; }
+    public void setEmail(String email) { this.email = email; }
 }

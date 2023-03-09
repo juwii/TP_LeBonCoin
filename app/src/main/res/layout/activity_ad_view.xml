@@ -15,48 +15,82 @@
 
         <TextView
             android:id="@+id/material_phone_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_width="361dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
+            android:fontFamily="casual"
             android:text="+33 5 55 55 55 55"
+            android:textAlignment="center"
+            android:textColorLink="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/material_email_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/material_address_textview" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="244dp"
-            android:layout_height="233dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="30dp"
+        <TextView
+            android:id="@+id/material_email_textview"
+            android:layout_width="361dp"
+            android:layout_height="31dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
-            app:layout_constraintBottom_toTopOf="@+id/material_title_textview"
+            android:fontFamily="casual"
+            android:text="email"
+            android:textAlignment="center"
+            android:textColorLink="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/material_phone_textview" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="331dp"
+            android:layout_height="224dp"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/material_title_textview"
             app:srcCompat="@drawable/wood" />
 
         <TextView
             android:id="@+id/material_address_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="363dp"
+            android:layout_height="113dp"
+            android:layout_marginTop="20dp"
             android:layout_weight="1"
+            android:fontFamily="casual"
             android:text="43 rue de l'Aigle, La Rochelle"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColorLink="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintBottom_toTopOf="@+id/material_phone_textview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <TextView
             android:id="@+id/material_title_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_width="316dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="40dp"
             android:layout_weight="1"
+            android:fontFamily="casual"
             android:text="Wood"
-            app:layout_constraintBottom_toTopOf="@+id/material_address_textview"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#000000"
+            android:textSize="34sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

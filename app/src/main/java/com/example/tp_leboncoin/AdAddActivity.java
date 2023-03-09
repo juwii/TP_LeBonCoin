@@ -14,7 +14,6 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -27,8 +26,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,8 +37,8 @@ public class AdAddActivity extends AppCompatActivity {
     private static final int CAMERA_PERM_CODE = 101;
     private String filePath = "";
     // Define the button and imageview type variable
-    Button camera_open_id;
-    Button gallery_open_id;
+    ImageButton camera_open_id;
+    ImageButton gallery_open_id;
     ImageView click_image_id;
 
 
@@ -197,10 +196,11 @@ public class AdAddActivity extends AppCompatActivity {
             galleryActivityResultLauncher.launch(gallery);
         });
 
-        Button b1 = (Button) findViewById(R.id.send_button);
+        ImageButton b1 = (ImageButton) findViewById(R.id.send_button);
         EditText Title = (EditText) findViewById(R.id.material_title_edittext);
         EditText Address = (EditText) findViewById(R.id.material_address_edittext);
         EditText Phone = (EditText) findViewById(R.id.material_phone_edittext);
+        EditText Email = (EditText) findViewById(R.id.material_email_edittext);
 
         DBManager dbManager = DBManager.getDBManager(this);
         dbManager.open();
@@ -209,13 +209,13 @@ public class AdAddActivity extends AppCompatActivity {
             public void onClick(View view) {
                 AdModel ad;
                 if(!filePath.equals("")) {
-                    ad = new AdModel(Title.getText().toString(), Address.getText().toString(), null, filePath, Phone.getText().toString());
+                    ad = new AdModel(Title.getText().toString(), Address.getText().toString(), null, filePath, Phone.getText().toString(), Email.getText().toString());
                 } else {
                     String drawableName = "wood";
                     ContextWrapper cw = new ContextWrapper(getApplicationContext());
                     File resources = cw.getDir("res", Context.MODE_PRIVATE);
                     filePath = "/data/data/com.example.tp_leboncoin/code_cache/.overlay/base.apk/res/drawable/wood.png";
-                    ad = new AdModel(Title.getText().toString(), Address.getText().toString(), null, filePath, Phone.getText().toString());
+                    ad = new AdModel(Title.getText().toString(), Address.getText().toString(), null, filePath, Phone.getText().toString(), Email.getText().toString());
                 }
                 dbManager.insert(ad);
                 Intent sent = new Intent(AdAddActivity.this, display_list.class);
