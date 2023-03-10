@@ -4,6 +4,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -12,6 +13,7 @@ import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -22,6 +24,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -208,18 +211,40 @@ public class AdAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AdModel ad;
-                if(!filePath.equals("")) {
-                    ad = new AdModel(Title.getText().toString(), Address.getText().toString(), null, filePath, Phone.getText().toString(), Email.getText().toString());
+
+                if (TextUtils.isEmpty(Title.getText().toString())) {
+                    Title.setError("Please Enter a title!");
+                } else if (TextUtils.isEmpty(Address.getText().toString())) {
+                    Address.setError("Please Enter an address!");
+                } else if (TextUtils.isEmpty(Email.getText().toString())) {
+                    Email.setError("Please Enter an email address!");
+                } else if (TextUtils.isEmpty(Phone.getText().toString())) {
+                    Phone.setError("Please Enter a phone number!");
                 } else {
-                    String drawableName = "wood";
-                    ContextWrapper cw = new ContextWrapper(getApplicationContext());
-                    File resources = cw.getDir("res", Context.MODE_PRIVATE);
-                    filePath = "/data/data/com.example.tp_leboncoin/code_cache/.overlay/base.apk/res/drawable/wood.png";
-                    ad = new AdModel(Title.getText().toString(), Address.getText().toString(), null, filePath, Phone.getText().toString(), Email.getText().toString());
+                    if (!filePath.equals("")) {
+                        ad = new AdModel(Title.getText().toString(), Address.getText().toString(), null, filePath, Phone.getText().toString(), Email.getText().toString());
+                    } else {
+                        String drawableName = "wood";
+                        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+                        File resources = cw.getDir("res", Context.MODE_PRIVATE);
+                        System.out.println(resources);
+                        //filePath = "/data/data/com.example.tp_leboncoin/code_cache/.overlay/base.apk/res/drawable/wood.png";
+                        filePath = resources + "/drawable/wood.png";
+                        ad = new AdModel(Title.getText().toString(), Address.getText().toString(), null, filePath, Phone.getText().toString(), Email.getText().toString());
+                    }
+                    dbManager.insert(ad);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(AdAddActivity.this);
+                    builder.setMessage("Ad added! Thank you for your participation.");
+                    builder.setTitle("Congratulations");
+                    builder.setCancelable(false);
+                    builder.setPositiveButton("OK", (DialogInterface.OnClickListener) (dialog, which) -> {
+                        Intent sent = new Intent(AdAddActivity.this, display_list.class);
+                        startActivity(sent);
+                        finish();
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
                 }
-                dbManager.insert(ad);
-                Intent sent = new Intent(AdAddActivity.this, display_list.class);
-                startActivity (sent);
             }
         });
     }
